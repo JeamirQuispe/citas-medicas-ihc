@@ -1,17 +1,58 @@
-# Sistema Web de Gestion de Citas Medicas - Bienestar UNT
+# Sistema Web de Gestión de Citas Médicas · Bienestar UNT
 
-Sistema web para administrar citas medicas del area de Bienestar Universitario. El flujo principal es:
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat&logo=nodedotjs&logoColor=white)
+![Express](https://img.shields.io/badge/Express-000000?style=flat&logo=express&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
+![EJS](https://img.shields.io/badge/EJS-B4CA65?style=flat&logo=ejs&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+
+Aplicación web para gestionar las citas médicas del área de Bienestar Universitario de la Universidad Nacional de Trujillo. Desarrollada para el curso de Interacción Humano-Computador (IHC), con foco en usabilidad y accesibilidad.
 
 ```txt
-Paciente reserva cita -> Enfermera registra triaje -> Medico atiende -> Consulta queda en historial
+Paciente reserva cita -> Enfermera registra triaje -> Médico atiende -> Consulta queda en historial
 ```
 
-El sistema trabaja con cuatro roles:
+## Características
 
-- `paciente`: reserva citas, revisa sus citas, cancela citas pendientes y consulta su historial.
-- `enfermera`: ve citas pendientes de triaje, registra signos vitales y revisa historial de triajes.
-- `medico`: atiende citas con triaje, guarda borradores, confirma consultas y revisa pacientes/historial.
-- `administrativo`: gestiona usuarios, personal medico/enfermeria y citas segun su nivel de acceso.
+- **4 roles con acceso diferenciado:** paciente, enfermera, médico y administrativo.
+- **Flujo clínico completo:** reserva de cita, triaje, atención médica (con borradores de consulta), recetas e historial.
+- **Gestión administrativa:** alta y baja de usuarios, personal médico y de enfermería, y control de citas.
+- **Seguridad:** contraseñas con `bcrypt`, sesiones almacenadas en MySQL, protección CSRF, limitación de intentos de inicio de sesión y control de acceso por rol.
+- **Usabilidad y accesibilidad (IHC):** tamaño de texto ajustable, modo de alto contraste, validaciones en formularios, mensajes de retroalimentación y secciones de ayuda por rol.
+- **Base de datos relacional:** 16 tablas (usuarios, citas, triajes, antecedentes, consultas, medicamentos, notificaciones) con scripts de esquema y datos de prueba.
+
+## Tecnologías
+
+| Capa | Tecnología |
+|---|---|
+| Backend | Node.js, Express 5 |
+| Vistas | EJS con layouts, CSS y JavaScript del lado del cliente |
+| Base de datos | MySQL (`mysql2`) |
+| Seguridad | bcrypt, express-session, CSRF y rate limiting propios |
+| Gestor de paquetes | pnpm |
+
+## Estructura del proyecto
+
+```txt
+src/
+  config/        conexión a MySQL y almacén de sesiones
+  controllers/   lógica por rol (admin, médico, enfermera, paciente, perfil, auth)
+  middlewares/   autenticación, roles, CSRF y rate limit
+  routes/        rutas por rol
+  services/      envío de correos (SMTP)
+  views/         plantillas EJS por rol
+  public/        estilos, scripts del cliente e imágenes
+database/        esquema, datos de prueba y script de limpieza
+```
+
+## Equipo
+
+Proyecto académico desarrollado en equipo en la Universidad Nacional de Trujillo:
+
+- [Jeamir Quispe](https://github.com/JeamirQuispe)
+- [Nelson Pineda](https://github.com/NelsonPA26) · repositorio original: [NelsonPA26/citas-medicas-ihc](https://github.com/NelsonPA26/citas-medicas-ihc)
+
+Este repositorio conserva el historial de commits de la rama de trabajo `jeamir`.
 
 ## Requisitos
 
